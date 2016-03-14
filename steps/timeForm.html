@@ -1,0 +1,75 @@
+﻿<form name="timeForm"
+      class="time-form-container">
+    <div class="row">
+        <div class="col-xs-12 header">
+            <span>When would you like to book?</span>
+        </div>
+        <div class="row form-group">
+            <div class="col-md-6">
+                <div class="input-prepend">
+                    <a class="btn"><i class="fa fa-calendar" ng-click="openCalendar()"></i></a>
+                    <input type="text" 
+                           name="txtDate"
+                           class="form-control" 
+                           uib-datepicker-popup="{{format}}" 
+                           ng-model="date" 
+                           is-open="calendar.opened" 
+                           datepicker-options="dateOptions" 
+                           ng-required="true" 
+                           close-text="Close" 
+                           ng-focus="openCalendar()"
+                           placeholder="Select date"
+                           ng-class="{error: timeForm.txtDate.$invalid && timeForm.submitted}" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-prepend">
+                    <i class="fa fa-clock-o"></i>
+                    <select class="form-control"
+                            name="ddlTime"
+                            ng-model="time"
+                            ng-options="time.time as time.time for time in times"
+                            ng-class="{error: timeForm.ddlTime.$invalid && timeForm.submitted}"
+                            required>
+                        <option disabled value="" hidden>Select time</option>
+                    </select>
+                </div>
+                <div class="col-xs-12 checkbox">
+                    <label>
+                        <input ng-model="isFlexible"
+                               type="checkbox"> I can be flexible with time</input>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 header">
+            <span>Please enter your zip code</span>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-6">
+                <div class="input-prepend">
+                    <i class="fa fa-map-marker"></i>
+                    <input class="form-control"
+                           name="txtZip"
+                           ng-model="zip"
+                           type="text"
+                           id="txtZip"
+                           placeholder="Zip code"
+                           ng-class="{error: timeForm.txtZip.$invalid && timeForm.submitted}"
+                           required />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-5 btn-container">
+            <button class="btn btn-danger"
+                    type="button"
+                    ng-click="nextStep(timeForm)">
+                NEXT
+            </button>
+        </div>
+    </div>
+</form>

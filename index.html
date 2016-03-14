@@ -1,0 +1,45 @@
+﻿<html ng-app="testApp">
+<head>
+    <meta charset="utf-8" />
+    <title>Test</title>
+    <!-- font -->
+    <link href='https://fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'>
+    <!-- 3rd party -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.4/ui-bootstrap-tpls.js"></script>
+    <link rel="stylesheet" href="stylesheet/bootstrap.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- app -->
+    <link rel="stylesheet" type="text/css" href="stylesheet/testStyle.css">
+    <script src="scripts/app.js"></script>
+    <script src="scripts/testController.js"></script>
+</head>
+<body ng-cloak>
+    <div ng-controller="testController">
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="navbar navbar-default navbar-fixed-top">
+                    <ul class="nav navbar-nav">
+                        <li class="col-xs-3"
+                            ng-class="{complete: step > 0}"><a><span class="vertical-center"><span class="header-number">&#9312;</span><span class="header-text">Date and zip code</span></span></a></li>
+                        <li class="col-xs-3"
+                            ng-class="{complete: step > 1}"><a><span class="vertical-center"><span class="header-number">&#9313;</span><span class="header-text">Cleaning details</span></span></a></li>
+                        <li class="col-xs-3"><a><span class="vertical-center"><span class="header-number">&#9314;</span><span class="header-text">Address</span></span></a></li>
+                        <li class="col-xs-3"><a><span class="vertical-center"><span class="header-number">&#9315;</span><span class="header-text">Payment</span></span></a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="row">
+                <div ng-switch on="step">
+                    <div ng-switch-when="1">
+                        <ng-include src="'steps/timeForm.html'"></ng-include>
+                    </div>
+                    <div ng-switch-when="2">
+                        <ng-include src="'steps/cleaningForm.html'"></ng-include>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

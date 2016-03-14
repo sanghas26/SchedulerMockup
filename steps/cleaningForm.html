@@ -1,0 +1,116 @@
+﻿<form name="cleaningForm" class="cleaning-form-container">
+    <div class="row">
+        <div class="col-xs-12 header">
+            <span>How much time do you need?</span>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-6">
+                <div class="input-prepend">
+                    <i class="fa fa-clock-o"></i>
+                    <select class="form-control"
+                            name="ddlDuration"
+                            ng-model="duration"
+                            ng-class="{error: cleaningForm.ddlDuration.$invalid && cleaningForm.submitted}"
+                            required>
+                        <option disabled value="" hidden>Duration in hours</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <a href="#"><i class="fa fa-question-circle"></i></a> <span class="small-font">Our basic cleaning</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 header">
+            <span>How Often?</span>
+        </div>
+        <div class="row form-group">
+            <div class="col-sm-6">
+                <div class="input-prepend">
+                    <i class="fa fa-refresh"></i>
+                    <div uib-dropdown>
+                        <select class="form-control hide-options"
+                                name="ddlFrequency"
+                                id="simple-dropdown"
+                                ng-model="frequency"
+                                ng-options="freq as freq.value for freq in frequencies"
+                                uib-dropdown-toggle
+                            ng-class="{error: cleaningForm.ddlFrequency.$invalid && cleaningForm.submitted}"
+                                required>
+                            <option value="" disabled selected hidden>Select frequency</option>
+                        </select>
+                        <ul uib-dropdown-menu aria-labelledby="simple-dropdown">
+                            <li ng-repeat="frequency in frequencies">
+                                <a ng-click="onSelectFrequency(frequency)">
+                                    <span class="bestseller col-xs-12" ng-if="frequency.bestseller"><i class="fa fa-star-o"></i>Bestseller</span>
+                                    <strong>{{frequency.value}}</strong>
+                                    <span>{{frequency.price}}</span>
+                                </a>
+                                <hr ng-if="$index < frequencies.length - 1" />
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="arrow-up"
+             ng-if="frequency"></div>
+        <div class="row price-offer-container"
+             ng-if="frequency">
+            <div class="col-xs-12 header">
+                <span>Your individual price offer <i class="fa fa-question-circle"></i></span>
+            </div>
+            <div class="col-xs-12">
+                <div class="col-sm-3"
+                     ng-repeat="priceOffer in priceOffers">
+                    <div class="price-offer-item"
+                         ng-class="{active: isOfferSelected(priceOffer)}"
+                         ng-click="setOffer(priceOffer)">
+                        <span>{{priceOffer.name}}</span>
+                        <span>{{priceOffer.value}}</span>
+                        <div>
+                            <input type="radio"
+                                   name="btnOffer"
+                                   ng-model="offer"
+                                   ng-value="priceOffer" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 footer"
+                 ng-if="offer">
+                <div class="col-xs-12">
+                    <i class="fa fa-thumbs-o-up"></i> <span class="vertical-center">{{offer.name}} Your home will be cleaned by an experienced Tiger!</span>
+                </div>
+                <div class="col-xs-12">
+                    <strong>Our service:</strong> We will contact you before your booking to arrange final details.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="btn-container">
+            <div class="col-xs-5">
+                <button class="btn btn-danger"
+                        type="button"
+                        ng-click="nextStep(cleaningForm)">
+                    NEXT
+                </button>
+            </div>
+            <div class="col-xs-2">
+                <button class="btn btn-link"
+                        type="button"
+                        ng-click="previousStep()">
+                    Go back
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
